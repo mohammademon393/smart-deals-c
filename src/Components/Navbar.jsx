@@ -1,4 +1,5 @@
 import React from "react";
+import { CgLogIn } from "react-icons/cg";
 import { FaUser } from "react-icons/fa";
 import { FaDiagramProject } from "react-icons/fa6";
 import { GiSkills } from "react-icons/gi";
@@ -75,7 +76,7 @@ const Navbar = () => {
   );
 
   return (
-    <div className="bg-gradient-to-r from-[#010811] via-[#0a3a6e] to-[#010811]">
+    <div className="sticky top-0 z-50 bg-gradient-to-r from-[#010811] via-[#0a3a6e] to-[#010811]">
       <div className="navbar max-w-7xl mx-auto text-white shadow-sm">
         <div className="navbar-start">
           <div className="dropdown">
@@ -113,9 +114,12 @@ const Navbar = () => {
           <ul className="menu menu-horizontal px-1">{Links}</ul>
         </div>
         <div className="navbar-end">
-          <Link className="btn bg-[#1C99FF] border-0 text-white" to={"contact"}>
-            <TfiHeadphoneAlt />
-            Contact Us
+          <Link
+            className="btn bg-primary-gradient border-0 text-white"
+            to={"/login"}
+          >
+            <CgLogIn />
+            Login
           </Link>
         </div>
       </div>

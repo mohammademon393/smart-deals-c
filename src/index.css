@@ -4,6 +4,12 @@
 @plugin "daisyui/theme" {
   name: "light";
   default: true;
-  --color-primary: blue;
-  --color-secondary: teal;
+  --color-primary: #9f62f2;
+  /* Keep a solid color for borders/focus */
+}
+
+@layer utilities {
+  .bg-primary-gradient {
+    background: linear-gradient(125.07deg, #632ee3 0%, #9f62f2 100%);
+  }
 }
