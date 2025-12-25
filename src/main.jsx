@@ -7,6 +7,7 @@ import RootLayout from './layout/RootLayout';
 import Home from './pages/Home';
 import AllProducts from './pages/AllProducts';
 import Login from './Components/Login';
+import SignUp from './Components/SignUp';
 
 
 
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
       {
         path: '/allProducts',
         Component: AllProducts,
+      },
+      {
+        path: '/singUp',
+        Component: SignUp
       },
       {
         path: '/login',

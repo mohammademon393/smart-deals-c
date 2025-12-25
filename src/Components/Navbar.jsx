@@ -115,6 +115,13 @@ const Navbar = () => {
         </div>
         <div className="navbar-end">
           <Link
+            className="btn btn-outline btn-primary border-2 mr-2 text-white"
+            to={"/singUp"}
+          >
+            <CgLogIn />
+            SignUp
+          </Link>
+          <Link
             className="btn bg-primary-gradient border-0 text-white"
             to={"/login"}
           >
