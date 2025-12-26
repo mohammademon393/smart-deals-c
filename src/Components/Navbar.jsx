@@ -130,7 +130,7 @@ const Navbar = () => {
               className="btn btn-outline btn-primary border-2 mr-2 text-white"
             >
               <FiLogOut />
-              Sign up
+              Register
             </Link>
           )}
           {user ? (
@@ -139,7 +139,7 @@ const Navbar = () => {
               className="btn btn-outline btn-primary border-2 mr-2 text-white"
             >
               <FiLogOut />
-              LogOut
+              Log Out
             </Link>
           ) : (
             <Link
