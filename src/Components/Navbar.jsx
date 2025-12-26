@@ -5,7 +5,7 @@ import { FaDiagramProject } from "react-icons/fa6";
 import { GiSkills } from "react-icons/gi";
 import { GrServices } from "react-icons/gr";
 import { IoIosHome } from "react-icons/io";
-import { MdInventory2, MdProductionQuantityLimits } from "react-icons/md";
+import { MdCreateNewFolder, MdInventory2, MdProductionQuantityLimits } from "react-icons/md";
 import { TfiHeadphoneAlt } from "react-icons/tfi";
 import { Link, NavLink } from "react-router";
 import { AuthContext } from "../Contexts/AuthContext";
@@ -32,7 +32,9 @@ const Navbar = () => {
         <NavLink
           to="/"
           className={({ isActive }) =>
-            isActive ? "text-[#00C2FF] font-bold" : "hover:text-[#00C2FF]"
+            isActive
+              ? "text-[#00C2FF] underline font-bold"
+              : "hover:text-[#00C2FF]"
           }
         >
           {" "}
@@ -45,7 +47,9 @@ const Navbar = () => {
         <NavLink
           to="/allProducts"
           className={({ isActive }) =>
-            isActive ? "text-[#00C2FF] font-bold" : "hover:text-[#00C2FF]"
+            isActive
+              ? "text-[#00C2FF] underline font-bold"
+              : "hover:text-[#00C2FF]"
           }
         >
           <MdProductionQuantityLimits />
@@ -59,7 +63,9 @@ const Navbar = () => {
             <NavLink
               to="/myProducts"
               className={({ isActive }) =>
-                isActive ? "text-[#00C2FF] font-bold" : "hover:text-[#00C2FF]"
+                isActive
+                  ? "text-[#00C2FF] underline font-bold"
+                  : "hover:text-[#00C2FF]"
               }
             >
               <MdInventory2 />
@@ -70,16 +76,30 @@ const Navbar = () => {
             <NavLink
               to="/myBids"
               className={({ isActive }) =>
-                isActive ? "text-[#00C2FF] font-bold" : "hover:text-[#00C2FF]"
+                isActive
+                  ? "text-[#00C2FF] underline font-bold"
+                  : "hover:text-[#00C2FF]"
               }
             >
               <FaGavel />
               My Bids
             </NavLink>
           </li>
+          <li>
+            <NavLink
+              to="/createProduct"
+              className={({ isActive }) =>
+                isActive
+                  ? "text-[#00C2FF] underline font-bold"
+                  : "hover:text-[#00C2FF]"
+              }
+            >
+              <MdCreateNewFolder />
+              Create Product
+            </NavLink>
+          </li>
         </>
       )}
-
     </>
   );
 
@@ -115,7 +135,7 @@ const Navbar = () => {
           <a className="btn btn-ghost text-xl">
             {" "}
             Smart
-            <span className="text-[#00C2FF] ml-[-5px]">Deals</span>
+            <span className="text-primary ml-[-5px]">Deals</span>
           </a>
         </div>
         <div className="navbar-center hidden lg:flex">

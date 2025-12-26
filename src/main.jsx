@@ -12,6 +12,7 @@ import AuthProvider from './Contexts/AuthProvider';
 import PrivetRoute from './Contexts/PrivetRoute';
 import MyProducts from './pages/MyProducts';
 import MyBids from './pages/MyBids';
+import CreateProduct from './pages/CreateProduct';
 
 
 
@@ -19,36 +20,48 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <RootLayout></RootLayout>,
-    children:[
+    children: [
       {
-        index:true,
+        index: true,
         Component: Home,
       },
       {
-        path: '/allProducts',
+        path: "/allProducts",
         Component: AllProducts,
       },
       {
-        path: '/singUp',
-        Component: SignUp
+        path: "/singUp",
+        Component: SignUp,
       },
       {
-        path: '/login',
-        Component: Login
+        path: "/login",
+        Component: Login,
       },
       {
-        path: '/myProducts',
-        element: <PrivetRoute>
-          <MyProducts></MyProducts>
-        </PrivetRoute>
+        path: "/myProducts",
+        element: (
+          <PrivetRoute>
+            <MyProducts></MyProducts>
+          </PrivetRoute>
+        ),
       },
       {
-        path: '/myBids',
-        element: <PrivetRoute>
-          <MyBids></MyBids>
-        </PrivetRoute>
-      }
-    ]
+        path: "/myBids",
+        element: (
+          <PrivetRoute>
+            <MyBids></MyBids>
+          </PrivetRoute>
+        ),
+      },
+      {
+        path: "/createProduct",
+        element: (
+          <PrivetRoute>
+            <CreateProduct></CreateProduct>
+          </PrivetRoute>
+        ),
+      },
+    ],
   },
 ]);
 
