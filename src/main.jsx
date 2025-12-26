@@ -13,6 +13,7 @@ import PrivetRoute from './Contexts/PrivetRoute';
 import MyProducts from './pages/MyProducts';
 import MyBids from './pages/MyBids';
 import CreateProduct from './pages/CreateProduct';
+import ProductsDetails from './Components/ProductsDetails';
 
 
 
@@ -61,6 +62,11 @@ const router = createBrowserRouter([
           </PrivetRoute>
         ),
       },
+      {
+        path: "/productDetails/:id",
+        loader: ({params}) => fetch(`http://localhost:3000/products/${params.id}`),
+        element: <ProductsDetails></ProductsDetails>
+      }
     ],
   },
 ]);
