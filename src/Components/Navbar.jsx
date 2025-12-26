@@ -1,15 +1,31 @@
-import React from "react";
+import React, { useContext } from "react";
 import { CgLogIn } from "react-icons/cg";
-import { FaUser } from "react-icons/fa";
+import { FaGavel, FaUser } from "react-icons/fa";
 import { FaDiagramProject } from "react-icons/fa6";
 import { GiSkills } from "react-icons/gi";
 import { GrServices } from "react-icons/gr";
 import { IoIosHome } from "react-icons/io";
-import { MdProductionQuantityLimits } from "react-icons/md";
+import { MdInventory2, MdProductionQuantityLimits } from "react-icons/md";
 import { TfiHeadphoneAlt } from "react-icons/tfi";
 import { Link, NavLink } from "react-router";
+import { AuthContext } from "../Contexts/AuthContext";
+import { FiLogOut } from "react-icons/fi";
 
 const Navbar = () => {
+
+  const { user, signOutGoogle } = useContext(AuthContext);
+
+  // sign out handler
+  const handleSignOut = () => {
+    signOutGoogle()
+      .then((result) => { 
+        console.log(result.user);
+       })
+      .catch((error) => {
+        console.log(error.message);
+      })};
+
+
   const Links = (
     <>
       <li>
@@ -37,41 +53,33 @@ const Navbar = () => {
         </NavLink>
       </li>
 
-      {/* <li>
-        <NavLink
-          to="/projects"
-          className={({ isActive }) =>
-            isActive ? "text-[#00C2FF] font-bold" : "hover:text-[#00C2FF]"
-          }
-        >
-          <FaDiagramProject />
-          Projects
-        </NavLink>
-      </li>
+      {user && (
+        <>
+          <li>
+            <NavLink
+              to="/myProducts"
+              className={({ isActive }) =>
+                isActive ? "text-[#00C2FF] font-bold" : "hover:text-[#00C2FF]"
+              }
+            >
+              <MdInventory2 />
+              My Products
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/myBids"
+              className={({ isActive }) =>
+                isActive ? "text-[#00C2FF] font-bold" : "hover:text-[#00C2FF]"
+              }
+            >
+              <FaGavel />
+              My Bids
+            </NavLink>
+          </li>
+        </>
+      )}
 
-      <li>
-        <NavLink
-          to="/skills"
-          className={({ isActive }) =>
-            isActive ? "text-[#00C2FF] font-bold" : "hover:text-[#00C2FF]"
-          }
-        >
-          <GiSkills />
-          Skills
-        </NavLink>
-      </li>
-
-      <li>
-        <NavLink
-          to="/service"
-          className={({ isActive }) =>
-            isActive ? "text-[#00C2FF] font-bold" : "hover:text-[#00C2FF]"
-          }
-        >
-          <GrServices />
-          Service
-        </NavLink>
-      </li> */}
     </>
   );
 
@@ -114,20 +122,34 @@ const Navbar = () => {
           <ul className="menu menu-horizontal px-1">{Links}</ul>
         </div>
         <div className="navbar-end">
-          <Link
-            className="btn btn-outline btn-primary border-2 mr-2 text-white"
-            to={"/singUp"}
-          >
-            <CgLogIn />
-            SignUp
-          </Link>
-          <Link
-            className="btn bg-primary-gradient border-0 text-white"
-            to={"/login"}
-          >
-            <CgLogIn />
-            Login
-          </Link>
+          {user ? (
+            ""
+          ) : (
+            <Link
+              to={"/singUp"}
+              className="btn btn-outline btn-primary border-2 mr-2 text-white"
+            >
+              <FiLogOut />
+              Sign up
+            </Link>
+          )}
+          {user ? (
+            <Link
+              onClick={handleSignOut}
+              className="btn btn-outline btn-primary border-2 mr-2 text-white"
+            >
+              <FiLogOut />
+              LogOut
+            </Link>
+          ) : (
+            <Link
+              className="btn bg-primary-gradient border-0 text-white"
+              to={"/login"}
+            >
+              <CgLogIn />
+              Login
+            </Link>
+          )}
         </div>
       </div>
     </div>

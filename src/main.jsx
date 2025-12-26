@@ -9,6 +9,8 @@ import AllProducts from './pages/AllProducts';
 import Login from './Components/Login';
 import SignUp from './Components/SignUp';
 import AuthProvider from './Contexts/AuthProvider';
+import MyProducts from './Components/MyProducts';
+import MyBids from './Components/MyBids';
 
 
 
@@ -33,6 +35,14 @@ const router = createBrowserRouter([
         path: '/login',
         Component: Login
       },
+      {
+        path: '/myProducts',
+        Component: MyProducts
+      },
+      {
+        path: '/myBids',
+        Component: MyBids
+      }
     ]
   },
 ]);
