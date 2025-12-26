@@ -11,6 +11,7 @@ import SignUp from './Components/SignUp';
 import AuthProvider from './Contexts/AuthProvider';
 import MyProducts from './Components/MyProducts';
 import MyBids from './Components/MyBids';
+import PrivetRoute from './Contexts/PrivetRoute';
 
 
 
@@ -37,11 +38,15 @@ const router = createBrowserRouter([
       },
       {
         path: '/myProducts',
-        Component: MyProducts
+        element: <PrivetRoute>
+          <MyProducts></MyProducts>
+        </PrivetRoute>
       },
       {
         path: '/myBids',
-        Component: MyBids
+        element: <PrivetRoute>
+          <MyBids></MyBids>
+        </PrivetRoute>
       }
     ]
   },
