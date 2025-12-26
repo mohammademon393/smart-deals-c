@@ -1,9 +1,10 @@
 import React from 'react';
+import Banner from '../Components/Banner';
 
 const Home = () => {
     return (
       <div className='min-h-screen'>
-        <h1 className="bg-primary-gradient">Home Page</h1>
+        <Banner></Banner>
         <h1 className="text-primary text-4xl font-bold text-center ">Home Page</h1>
       </div>
     );

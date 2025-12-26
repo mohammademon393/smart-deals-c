@@ -9,9 +9,9 @@ import AllProducts from './pages/AllProducts';
 import Login from './Components/Login';
 import SignUp from './Components/SignUp';
 import AuthProvider from './Contexts/AuthProvider';
-import MyProducts from './Components/MyProducts';
-import MyBids from './Components/MyBids';
 import PrivetRoute from './Contexts/PrivetRoute';
+import MyProducts from './pages/MyProducts';
+import MyBids from './pages/MyBids';
 
 
 
