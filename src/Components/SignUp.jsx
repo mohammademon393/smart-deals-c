@@ -9,7 +9,27 @@ const SignUp = () => {
         signInWithGoogle()
         .then(result =>{
             console.log(result.user);
+
+            const newUser = {
+                name: result.user.displayName,
+                email: result.user.email,
+                photoURL: result.user.photoURL,
+                uid: result.user.uid,
+            };
             
+            // create users in your database
+            fetch("http://localhost:3000/users", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(newUser)
+            })
+            .then( res => res.json())
+            .then(data => {
+                console.log('data after save users',data);
+            });
+
         })
         .catch(error => {
             console.log(error.message);
