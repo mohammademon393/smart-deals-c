@@ -3,7 +3,7 @@ import { useLoaderData } from 'react-router';
 
 const ProductsDetails = () => {
     const product = useLoaderData();
-    console.log(product);
+    console.log('product details', product);
     
     return (
         <div>

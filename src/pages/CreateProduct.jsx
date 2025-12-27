@@ -2,9 +2,9 @@ import React from 'react';
 
 const CreateProduct = () => {
     return (
-        <div>
-            <h1>Create Product</h1>
-        </div>
+      <div className="min-h-screen">
+        <h1>Create Product</h1>
+      </div>
     );
 };
 

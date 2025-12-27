@@ -4,7 +4,7 @@ import { Link } from "react-router";
 
 const LatestProducts = ({ LatestProductsPromise }) => {
   const products = use(LatestProductsPromise);
-  console.log(products);
+
 
   return (
     <div className="max-w-7xl mx-auto mb-14">

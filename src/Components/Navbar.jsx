@@ -132,7 +132,7 @@ const Navbar = () => {
               {Links}
             </ul>
           </div>
-          <Link to={'/'} className="cursor-pointer font-semibold text-3xl">
+          <Link to={'/'} className="cursor-pointer font-bold text-3xl">
             {" "}
             Smart
             <span className="text-primary ml-[-5px]">Deals</span>

@@ -10,8 +10,8 @@ const Product = ({ product }) => {
       </figure>
       <div className="card-body ">
         <h2 className="card-title">{title}</h2>
-        <p>
-          Price: ${price_min} - {price_max}
+        <p className="text-primary">
+          ${price_min} - {price_max}
         </p>
         <div className="card-actions w-full">
           <Link

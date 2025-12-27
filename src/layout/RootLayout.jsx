@@ -5,11 +5,11 @@ import Footer from '../Components/Footer';
 
 const RootLayout = () => {
     return (
-        <div>
-            <Navbar></Navbar>
-            <Outlet></Outlet>
-            <Footer></Footer>
-        </div>
+      <div className="bg-[#D9D9D9]">
+        <Navbar></Navbar>
+        <Outlet></Outlet>
+        <Footer></Footer>
+      </div>
     );
 };
 
