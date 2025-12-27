@@ -42,10 +42,10 @@ const Banner = () => {
           </button>
         </div>
         <div>
-          <Link className="btn bg-primary-gradient text-white mr-2">
+          <Link to={'/allProducts'} className="btn bg-primary-gradient text-white mr-2">
             Watch All Products
           </Link>
-          <Link className="btn btn-primary btn-outline">Post an Product</Link>
+          <Link to={'/createProduct'} className="btn btn-primary btn-outline">Post an Product</Link>
         </div>
       </div>
     </div>
