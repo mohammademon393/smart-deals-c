@@ -33,7 +33,7 @@ const Navbar = () => {
           to="/"
           className={({ isActive }) =>
             isActive
-              ? "text-[#00C2FF] underline font-bold"
+              ? "text-primary underline font-bold"
               : "hover:text-[#00C2FF]"
           }
         >
@@ -48,7 +48,7 @@ const Navbar = () => {
           to="/allProducts"
           className={({ isActive }) =>
             isActive
-              ? "text-[#00C2FF] underline font-bold"
+              ? "text-primary underline font-bold"
               : "hover:text-[#00C2FF]"
           }
         >
@@ -64,7 +64,7 @@ const Navbar = () => {
               to="/myProducts"
               className={({ isActive }) =>
                 isActive
-                  ? "text-[#00C2FF] underline font-bold"
+                  ? "text-primary underline font-bold"
                   : "hover:text-[#00C2FF]"
               }
             >
@@ -77,7 +77,7 @@ const Navbar = () => {
               to="/myBids"
               className={({ isActive }) =>
                 isActive
-                  ? "text-[#00C2FF] underline font-bold"
+                  ? "text-primary underline font-bold"
                   : "hover:text-[#00C2FF]"
               }
             >
@@ -90,7 +90,7 @@ const Navbar = () => {
               to="/createProduct"
               className={({ isActive }) =>
                 isActive
-                  ? "text-[#00C2FF] underline font-bold"
+                  ? "text-primary underline font-bold"
                   : "hover:text-[#00C2FF]"
               }
             >
@@ -104,7 +104,7 @@ const Navbar = () => {
   );
 
   return (
-    <div className="sticky top-0 z-50 bg-gradient-to-r from-[#010811] via-[#0a3a6e] to-[#010811]">
+    <div className="sticky top-0 z-50 bg-gradient-to-r from-[#010811] via-[#0a3a6e] to-[#010811] shadow-sm">
       <div className="navbar max-w-7xl mx-auto text-white shadow-sm">
         <div className="navbar-start">
           <div className="dropdown">

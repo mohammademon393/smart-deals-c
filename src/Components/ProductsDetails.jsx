@@ -1,9 +1,14 @@
-import React from "react";
+import React, { use, useEffect, useRef, useState } from "react";
 import { Link, useLoaderData } from "react-router-dom";
+import { AuthContext } from "../Contexts/AuthContext";
+import Swal from "sweetalert2";
 
 const ProductsDetails = () => {
   const product = useLoaderData();
+  const { user } = use(AuthContext);
+  const [ bids, setBids ] = useState([]);
 
+  // Destructure product data
   const {
     _id,
     title,
@@ -22,6 +27,65 @@ const ProductsDetails = () => {
     seller_contact,
     email,
   } = product || {};
+
+  useEffect(() => {
+    fetch(`http://localhost:3000/product/bids/${_id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("bids for this products", data);
+        setBids(data);
+      });
+  }, [_id]);
+
+  
+
+  const bidsRef = useRef(null);
+  const handleBidsModal = () => {
+    bidsRef.current.showModal();
+  };
+  const handleBidsSubmite = (e) => {
+    e.preventDefault();
+    // add your submit logic here
+    const name = e.target.name.value;
+    const email = e.target.email.value;
+    const bid = e.target.bid.value;
+
+    const newBid = {
+      product: _id,
+      buyer_name: name,
+      buyer_email: email,
+      buyer_image: user?.photoURL,
+      bid_price: bid,
+      status: "pending",
+    };
+
+    fetch("http://localhost:3000/bids", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newBid),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.insertedId) {
+          bidsRef.current.close();
+          Swal.fire({
+            position: "top-center",
+            icon: "success",
+            title: "Your bids has been placed",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+
+          // add the new bid to the bids state
+          newBid._id = data.insertedId; 
+          const newBids = [...bids, newBid];
+          newBids.sort((a, b) => b.bid_price - a.bid_price); 
+          setBids(newBids);
+        }
+      });
+  };
 
   return (
     <div className="max-w-7xl mx-auto px-6 py-12 min-h-screen">
@@ -153,10 +217,140 @@ const ProductsDetails = () => {
           </div>
 
           {/* Buy Button */}
-          <button className="w-full bg-[#8B5CF6] hover:bg-[#7C3AED] text-white py-4 rounded-xl font-bold text-lg shadow-lg shadow-purple-200 transition-all uppercase tracking-wide">
-            I Want Buy This Product
+          <button
+            className="btn w-full bg-primary text-white font-bold"
+            onClick={handleBidsModal}
+          >
+            I want to buy this product
           </button>
+          {/* Open the modal using document.getElementById('ID').showModal() method */}
+          <dialog ref={bidsRef} className="modal modal-bottom sm:modal-middle">
+            <div className="modal-box">
+              {/* Title */}
+              <h2 className="text-2xl font-semibold text-center mb-6">
+                Give Seller Your Offered Price
+              </h2>
+
+              {/* Form */}
+              <form onSubmit={handleBidsSubmite}>
+                {/* Name & Email */}
+                <fieldset className="fieldset">
+                  {/* name */}
+                  <label className="label">Email</label>
+                  <input
+                    type="text"
+                    defaultValue={user?.displayName}
+                    readOnly
+                    className="input"
+                    name="name"
+                  />
+                  {/* email */}
+                  <label className="label">Email</label>
+                  <input
+                    type="email"
+                    defaultValue={user?.email}
+                    readOnly
+                    className="input"
+                    name="email"
+                  />
+                  {/* bids */}
+                  <label className="label">Your Bid</label>
+                  <input
+                    type="text"
+                    className="input"
+                    placeholder="Your Bids"
+                    name="bid"
+                  />
+                  <button className="btn btn-neutral mt-4">
+                    Please Your Bid
+                  </button>
+                </fieldset>
+              </form>
+
+              <div className="modal-action">
+                <form method="dialog">
+                  {/* if there is a button in form, it will close the modal */}
+                  <button className="btn">Cencel</button>
+                </form>
+              </div>
+            </div>
+          </dialog>
         </div>
+      </div>
+
+      {/* bids details here */}
+      <div className="mt-10 bg-white p-5 rounded-2xl">
+        <h2 className="text-2xl font-bold mt-5 mb-6">
+          Bids For This Products:
+          <span className="text-primary">{bids.length}</span>
+          {/* bids tables */}
+          <div className="overflow-x-auto mt-5">
+            <table className="table">
+              {/* head */}
+              <thead>
+                <tr>
+                  <th>SL NO.</th>
+                  <th>Products</th>
+                  <th>Buyer</th>
+                  <th>Bid Price</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {/* row 1 */}
+                {bids.map((bid, index) => (
+                  <tr>
+                    <th>{index + 1}</th>
+                    <td>
+                      <div className="flex items-center gap-3">
+                        <div className="avatar">
+                          <div className="mask rounded h-12 w-24">
+                            <img
+                              src={image}
+                              alt="Avatar Tailwind CSS Component"
+                            />
+                          </div>
+                        </div>
+                        <div>
+                          <div className="font-bold">{title}</div>
+                          <div className="text-sm opacity-50">${price_max}</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div className="flex items-center gap-3">
+                        <div className="avatar">
+                          <div className="mask mask-squircle h-12 w-12">
+                            <img
+                              src="https://img.daisyui.com/images/profile/demo/2@94.webp"
+                              alt={bid.buyer_name}
+                            />
+                          </div>
+                        </div>
+                        <div>
+                          <div className="font-bold">{bid.buyer_name}</div>
+                          <div className="text-sm opacity-50">
+                            {bid.buyer_email}
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>${bid.bid_price}</td>
+                    <th>
+                      <div className="btn cursor-pointer badge badge-outline badge-success">
+                        Accept Offer
+                      </div>
+                      <div className="btn cursor-pointer badge badge-outline badge-error ml-2">
+                        Reject offer
+                      </div>
+                    </th>
+                  </tr>
+                ))}
+                {/* row 2 */}
+              </tbody>
+            </table>
+          </div>
+        </h2>
       </div>
     </div>
   );
