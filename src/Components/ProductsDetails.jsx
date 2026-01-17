@@ -322,7 +322,7 @@ const ProductsDetails = () => {
                         <div className="avatar">
                           <div className="mask mask-squircle h-12 w-12">
                             <img
-                              src="https://img.daisyui.com/images/profile/demo/2@94.webp"
+                              src={bid.buyer_image}
                               alt={bid.buyer_name}
                             />
                           </div>
