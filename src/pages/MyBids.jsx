@@ -11,11 +11,15 @@ const MyBids = () => {
   // Destructure product data
   const { _id, title, price_max, image, email, seller_image, seller_name } =
     product || {};
-  console.log(product);
+  console.log('token', user.accessToken);
 
   useEffect(() => {
     if (user?.email) {
-      fetch(`http://localhost:3000/bids?email=${user.email}`)
+      fetch(`http://localhost:3000/bids?email=${user.email}`,{
+        headers: {
+          authorization: `bearer ${user.accessToken}`
+        }
+      })
         .then((res) => res.json())
         .then((data) => {
           setBids(data);
@@ -77,8 +81,9 @@ const MyBids = () => {
               </thead>
               <tbody>
                 {/* row 1 */}
-                {bids.map((bid, index) => (
-                  <tr>
+                {
+                  bids.map((bid, index) => (
+                  <tr key={index}>
                     <th>{index + 1}</th>
                     <td>
                       <div className="flex items-center gap-3">
